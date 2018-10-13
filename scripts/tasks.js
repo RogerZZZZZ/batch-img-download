@@ -20,3 +20,8 @@ exports.copyAssets = (type) => {
   cp('-R', 'chrome/assets/*', type);
   exec(`pug -O "{ env: '${env}' }" -o ${type} chrome/views/`);
 };
+
+exports.copyScripts = (type) => {
+  const env = type === 'build' ? 'prod' : type
+  cp('-R', 'chrome/extension/contentScripts/*', type)
+}

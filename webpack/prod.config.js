@@ -28,7 +28,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
-    })
+    }),
   ],
   resolve: {
     extensions: ['*', '.js']
