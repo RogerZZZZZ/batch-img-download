@@ -1,4 +1,12 @@
 (() => {
+  /**
+   * Todo:
+   * 1. add this file to watcher.
+   * 2. move the file with webpack instead of shell command.
+   * 3. split the file into modules.
+   */
+
+
   let firstClick = null
   let secondClick = null
   let flag = false
@@ -38,6 +46,26 @@
         pNode = pNode.parentNode
       } while (parentNode !== null)
       return null
+    },
+    nodeInOrder: (node1, node2) => {
+      // Todo: find out whether the nodes is in order
+
+    },
+  }
+
+  const paintHelper = {
+    flags: [],
+    paintFlag: (dom) => {
+      // Todo: paint the flag at the start and end location
+
+    },
+    clearPainting: () => {
+      // Todo: remove the flags on the screen
+
+    },
+    paintImage: (dom) => {
+      // Todo: add border around image.
+
     },
   }
 
