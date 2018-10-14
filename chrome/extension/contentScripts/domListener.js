@@ -1,9 +1,7 @@
 (() => {
-  console.log('0000')
-
-  const firstClick = null
-  const secondClick = null
-  const flag = false
+  let firstClick = null
+  let secondClick = null
+  let flag = false
 
   const clickHandler = (e) => {
     const path = e.path
@@ -32,8 +30,8 @@
       } while (node !== null)
       return false
     },
-    findAncestor: (node1, node2) => {
-      if (node1 === node2 || contain(node1, node2)) return node1
+    findAncestor: function(node1, node2) {
+      if (node1 === node2 || this.contain(node1, node2)) return node1
       let pNode = node1.parentNode
       do {
         if (pNode, node2) return pNode
@@ -44,7 +42,8 @@
   }
 
   const domHandler = () => {
-
+    console.log(firstClick, secondClick)
+    console.log(domHelper.findAncestor(firstClick, secondClick))
   }
 
   window.document.addEventListener('click', clickHandler)
