@@ -5,11 +5,37 @@
    * 2. move the file with webpack instead of shell command.
    * 3. split the file into modules.
    */
-
+  const domParser = new DOMParser()
 
   let firstClick = null
   let secondClick = null
   let flag = false
+  let order = 1
+
+  const paintHelper = {
+    flags: [],
+    paintFlag: function (dom) {
+      // Todo: paint the flag at the start and end location
+      const icon = this.createFlag()
+      dom.appendChild(icon)
+    },
+    clearPainting: () => {
+      // Todo: remove the flags on the screen
+
+    },
+    paintImage: (dom) => {
+      // Todo: add border around image.
+      console.log(dom)
+    },
+    createFlag: () => {
+      const name = flag ? 'begin' : 'end'
+      const position = flag ? 'left: 0; top: 32px;' : 'right: 0; bottom: 32px;'
+      return domParser.parseFromString(`<div style="position: relative; ${position} display: flex">
+          <img src="./img/${name}.png" style="width: 32px; height: 32px"/>
+          <span>${name}</span>
+        </div>`, 'text/html').documentElement
+    }
+  }
 
   const domHelper = {
     contain: (refNode, otherNode) => {
@@ -18,9 +44,8 @@
       do {
         if (node === refNode) {
           return true
-        } else {
-          node = node.parentNode
         }
+        node = node.parentNode
       } while (node !== null)
       return false
     },
@@ -38,13 +63,14 @@
 
       const position = node1.compareDocumentPosition(node2)
 
-      if (position & Node.DOCUMENT_POSITION_FOLLOWING || position & Node.DOCUMENT_POSITION_CONTAINED_BY) {
+      if ((position && Node.DOCUMENT_POSITION_FOLLOWING)
+        || (position && Node.DOCUMENT_POSITION_CONTAINED_BY)) {
         return -1
-      } else if (position & Node.DOCUMENT_POSITION_PRECEDING || position & Node.DOCUMENT_POSITION_CONTAINS) {
+      } else if ((position && Node.DOCUMENT_POSITION_PRECEDING)
+        || (position && Node.DOCUMENT_POSITION_CONTAINS)) {
         return 1
-      } else {
-        return 0
       }
+      return 0
     },
   }
 
@@ -53,31 +79,18 @@
     console.log(domHelper.findAncestor(firstClick, secondClick))
   }
 
-  const paintHelper = {
-    flags: [],
-    paintFlag: (dom) => {
-      // Todo: paint the flag at the start and end location
-      dom.style.background = '#ccc'
-    },
-    clearPainting: () => {
-      // Todo: remove the flags on the screen
-
-    },
-    paintImage: (dom) => {
-      // Todo: add border around image.
-
-    },
-  }
-
   const clickHandler = (e) => {
-    const path = e.path
-    const node = path.length ? path[0]: null
+    const node = e.target || e.srcElement
     if (!node) return
 
     if (!flag) {
       firstClick = node
     } else {
       secondClick = node
+      order = domHelper.nodeInOrder(firstClick, secondClick)
+      if (!order) {
+        firstClick = [secondClick, firstClick = secondClick][0]
+      }
       domHandler()
     }
 
