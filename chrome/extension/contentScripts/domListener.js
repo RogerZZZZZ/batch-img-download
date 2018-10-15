@@ -34,8 +34,17 @@
       return null
     },
     nodeInOrder: (node1, node2) => {
-      // Todo: find out whether the nodes is in order
+      if (node1 === node2) return 0
 
+      const position = node1.compareDocumentPosition(node2)
+
+      if (position & Node.DOCUMENT_POSITION_FOLLOWING || position & Node.DOCUMENT_POSITION_CONTAINED_BY) {
+        return -1
+      } else if (position & Node.DOCUMENT_POSITION_PRECEDING || position & Node.DOCUMENT_POSITION_CONTAINS) {
+        return 1
+      } else {
+        return 0
+      }
     },
   }
 
@@ -48,7 +57,7 @@
     flags: [],
     paintFlag: (dom) => {
       // Todo: paint the flag at the start and end location
-
+      dom.style.background = '#ccc'
     },
     clearPainting: () => {
       // Todo: remove the flags on the screen
@@ -71,6 +80,9 @@
       secondClick = node
       domHandler()
     }
+
+    paintHelper.paintFlag(node)
+
     flag = !flag
   }
 
