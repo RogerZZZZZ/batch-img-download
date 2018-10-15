@@ -11,20 +11,6 @@
   let secondClick = null
   let flag = false
 
-  const clickHandler = (e) => {
-    const path = e.path
-    const node = path.length ? path[0]: null
-    if (!node) return
-
-    if (!flag) {
-      firstClick = node
-    } else {
-      secondClick = node
-      domHandler()
-    }
-    flag = !flag
-  }
-
   const domHelper = {
     contain: (refNode, otherNode) => {
       if (!otherNode || !refNode) return false
@@ -38,19 +24,24 @@
       } while (node !== null)
       return false
     },
-    findAncestor: function(node1, node2) {
+    findAncestor: function findAncestor(node1, node2) {
       if (node1 === node2 || this.contain(node1, node2)) return node1
       let pNode = node1.parentNode
       do {
-        if (pNode, node2) return pNode
+        if (this.contain(pNode, node2)) return pNode
         pNode = pNode.parentNode
-      } while (parentNode !== null)
+      } while (pNode !== null)
       return null
     },
     nodeInOrder: (node1, node2) => {
       // Todo: find out whether the nodes is in order
 
     },
+  }
+
+  const domHandler = () => {
+    console.log(firstClick, secondClick)
+    console.log(domHelper.findAncestor(firstClick, secondClick))
   }
 
   const paintHelper = {
@@ -69,9 +60,18 @@
     },
   }
 
-  const domHandler = () => {
-    console.log(firstClick, secondClick)
-    console.log(domHelper.findAncestor(firstClick, secondClick))
+  const clickHandler = (e) => {
+    const path = e.path
+    const node = path.length ? path[0]: null
+    if (!node) return
+
+    if (!flag) {
+      firstClick = node
+    } else {
+      secondClick = node
+      domHandler()
+    }
+    flag = !flag
   }
 
   window.document.addEventListener('click', clickHandler)
