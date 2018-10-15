@@ -15,22 +15,21 @@
   const paintHelper = {
     flags: [],
     paintFlag: function (dom) {
-      // Todo: paint the flag at the start and end location
       const icon = this.createFlag()
+      this.flags.push(icon)
       dom.appendChild(icon)
     },
-    clearPainting: () => {
-      // Todo: remove the flags on the screen
-
+    clearPainting: function () {
+      this.flags.map(el => el.remove())
     },
     paintImage: (dom) => {
       // Todo: add border around image.
       console.log(dom)
     },
     createFlag: () => {
-      const name = flag ? 'begin' : 'end'
-      const position = flag ? 'left: 0; top: 32px;' : 'right: 0; bottom: 32px;'
-      return domParser.parseFromString(`<div style="position: relative; ${position} display: flex">
+      const name = !flag ? 'begin' : 'end'
+      const position = !flag ? 'left: 0; top: 32px;' : 'right: 0; bottom: 32px;'
+      return domParser.parseFromString(`<div style="position: absolute; ${position} display: flex">
           <img src="./img/${name}.png" style="width: 32px; height: 32px"/>
           <span>${name}</span>
         </div>`, 'text/html').documentElement
@@ -84,6 +83,7 @@
     if (!node) return
 
     if (!flag) {
+      paintHelper.clearPainting()
       firstClick = node
     } else {
       secondClick = node
