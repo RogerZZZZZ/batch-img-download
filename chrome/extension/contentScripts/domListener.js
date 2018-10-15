@@ -29,8 +29,9 @@
     createFlag: () => {
       const name = !flag ? 'begin' : 'end'
       const position = !flag ? 'left: 0; top: 32px;' : 'right: 0; bottom: 32px;'
+      const url = chrome.runtime.getURL(`img/${name}.png`)
       return domParser.parseFromString(`<div style="position: absolute; ${position} display: flex">
-          <img src="./img/${name}.png" style="width: 32px; height: 32px"/>
+          <img src="${url}" style="width: 32px; height: 32px"/>
           <span>${name}</span>
         </div>`, 'text/html').documentElement
     }
