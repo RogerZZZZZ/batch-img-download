@@ -58,12 +58,21 @@
       }
       return el.currentStyle[styleProp]
     },
+    findTag: (root) => {
+      //Todo find specific nodes in root
+      console.log(root)
+    },
   }
 
   const paintHelper = {
     flags: [],
-    paintFlag: function (dom) {
+    flagSize: 24,
+    paintFlag: function (dom, offsetX, offsetY) {
       const icon = this.createFlag()
+      const xPosition = offsetX - dom.getBoundingClientRect().left - (this.flagSize / 2)
+      const yPosition = offsetY - dom.getBoundingClientRect().top - (this.flagSize / 2)
+      icon.style.left = `${xPosition}px`
+      icon.style.top = `${yPosition}px`
       this.flags.push(icon)
       dom.appendChild(icon)
       const style = domHelper.getStyle(dom, 'position')
@@ -76,12 +85,11 @@
       // Todo: add border around image.
       console.log(dom)
     },
-    createFlag: () => {
+    createFlag: function () {
       const name = !flag ? 'begin' : 'end'
-      const position = !flag ? 'left: 0; top: -24px;' : 'right: 0; bottom: -24px;'
       const url = chrome.runtime.getURL(`img/${name}.png`)
-      return domHelper.htmlToElement(`<div style="position: absolute; ${position} display: flex; z-index: 9999;">
-          <img src="${url}" style="width: 24px; height: 24px; background: none;"/>
+      return domHelper.htmlToElement(`<div style="position: absolute; display: flex; z-index: 9999;">
+          <img src="${url}" style="width: ${this.flagSize}px; height: ${this.flagSize}px; background: none;"/>
         </div>`, 'text/html')
     }
   }
@@ -105,7 +113,7 @@
       domHandler()
     }
 
-    paintHelper.paintFlag(node)
+    paintHelper.paintFlag(node, e.clientX, e.clientY)
 
     flag = !flag
   }
