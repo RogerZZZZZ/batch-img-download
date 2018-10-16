@@ -10,6 +10,8 @@
   let flag = false
   let order = 1
 
+  console.log('trigger')
+
   const domHelper = {
     contain: (refNode, otherNode) => {
       if (!otherNode || !refNode) return false
@@ -117,11 +119,8 @@
     } else {
       secondClick = node
       order = domHelper.nodeInOrder(firstClick, secondClick)
-      console.log('order: ', order)
       if (order > 0) {
-        console.log(firstClick)
         firstClick = [secondClick, secondClick = firstClick][0]
-        console.log(firstClick)
         paintHelper.swapFlags()
       }
       domHandler()

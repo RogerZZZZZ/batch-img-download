@@ -7,10 +7,6 @@ console.log('[Copy assets]');
 console.log('-'.repeat(80));
 tasks.copyAssets('dev');
 
-console.log('[Copy content_scripts]')
-console.log('-'.repeat(80));
-tasks.copyScripts('dev')
-
 console.log('[Webpack Dev]');
 console.log('-'.repeat(80));
 console.log('If you\'re developing Inject page,');

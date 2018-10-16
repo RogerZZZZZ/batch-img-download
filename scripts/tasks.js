@@ -22,6 +22,5 @@ exports.copyAssets = (type) => {
 };
 
 exports.copyScripts = (type) => {
-  const env = type === 'build' ? 'prod' : type
   cp('-R', 'chrome/extension/contentScripts/*', type)
 }
