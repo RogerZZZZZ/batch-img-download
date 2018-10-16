@@ -5,25 +5,13 @@ const autoprefixer = require('autoprefixer');
 const host = 'localhost';
 const port = 3000;
 const customPath = path.join(__dirname, './customPublicPath');
-const hotScript = 'webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true';
 
 const baseDevConfig = () => ({
   devtool: 'eval-cheap-module-source-map',
   entry: {
-    todoapp: [customPath, hotScript, path.join(__dirname, '../chrome/extension/todoapp')],
-    background: [customPath, hotScript, path.join(__dirname, '../chrome/extension/background')],
-    domListener: [customPath, hotScript, path.join(__dirname, '../chrome/extension/contentScripts/domListener')]
-  },
-  devMiddleware: {
-    publicPath: `http://${host}:${port}/js`,
-    stats: {
-      colors: true
-    },
-    noInfo: true,
-    headers: { 'Access-Control-Allow-Origin': '*' }
-  },
-  hotMiddleware: {
-    path: '/js/__webpack_hmr'
+    todoapp: [customPath, path.join(__dirname, '../chrome/extension/todoapp')],
+    background: [customPath, path.join(__dirname, '../chrome/extension/background')],
+    domListener: [customPath, path.join(__dirname, '../chrome/extension/contentScripts/domListener')]
   },
   output: {
     path: path.join(__dirname, '../dev/js'),

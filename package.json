@@ -63,8 +63,6 @@
     "sinon": "^1.17.1",
     "style-loader": "^0.13.1",
     "webpack": "^3.10.0",
-    "webpack-hot-middleware": "^2.10.0",
-    "webpack-httpolyglot-server": "^0.3.0"
   },
   "dependencies": {
     "autoprefixer": "^7.2.5",
