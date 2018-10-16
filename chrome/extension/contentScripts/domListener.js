@@ -5,37 +5,10 @@
    * 2. move the file with webpack instead of shell command.
    * 3. split the file into modules.
    */
-  const domParser = new DOMParser()
-
   let firstClick = null
   let secondClick = null
   let flag = false
   let order = 1
-
-  const paintHelper = {
-    flags: [],
-    paintFlag: function (dom) {
-      const icon = this.createFlag()
-      this.flags.push(icon)
-      dom.appendChild(icon)
-    },
-    clearPainting: function () {
-      this.flags.map(el => el.remove())
-    },
-    paintImage: (dom) => {
-      // Todo: add border around image.
-      console.log(dom)
-    },
-    createFlag: () => {
-      const name = !flag ? 'begin' : 'end'
-      const position = !flag ? 'left: 0; top: 32px;' : 'right: 0; bottom: 32px;'
-      const url = chrome.runtime.getURL(`img/${name}.png`)
-      return domParser.parseFromString(`<div style="position: absolute; ${position} display: flex">
-          <img src="${url}" style="width: 32px; height: 32px"/>
-          <span>${name}</span>
-        </div>`, 'text/html').documentElement
-    }
-  }
 
   const domHelper = {
     contain: (refNode, otherNode) => {
@@ -72,6 +45,45 @@
       }
       return 0
     },
+    htmlToElement: (html) => {
+      const template = document.createElement('template')
+      template.innerHTML = html.trim()
+      return template.content.firstChild
+    },
+    getStyle: (el, styleProp) => {
+      const defaultView = (el.ownerDocument || document).defaultView
+      if (defaultView && defaultView.getComputedStyle) {
+        const prop = styleProp.replace(/([A-Z])/g, '-$1').toLowerCase();
+        return defaultView.getComputedStyle(el, null).getPropertyValue(prop)
+      }
+      return el.currentStyle[styleProp]
+    },
+  }
+
+  const paintHelper = {
+    flags: [],
+    paintFlag: function (dom) {
+      const icon = this.createFlag()
+      this.flags.push(icon)
+      dom.appendChild(icon)
+      const style = domHelper.getStyle(dom, 'position')
+      if (!style || style === 'static') dom.style.position = 'relative'
+    },
+    clearPainting: function () {
+      this.flags.map(el => el.remove())
+    },
+    paintImage: (dom) => {
+      // Todo: add border around image.
+      console.log(dom)
+    },
+    createFlag: () => {
+      const name = !flag ? 'begin' : 'end'
+      const position = !flag ? 'left: 0; top: -24px;' : 'right: 0; bottom: -24px;'
+      const url = chrome.runtime.getURL(`img/${name}.png`)
+      return domHelper.htmlToElement(`<div style="position: absolute; ${position} display: flex; z-index: 9999;">
+          <img src="${url}" style="width: 24px; height: 24px; background: none;"/>
+        </div>`, 'text/html')
+    }
   }
 
   const domHandler = () => {
@@ -89,9 +101,7 @@
     } else {
       secondClick = node
       order = domHelper.nodeInOrder(firstClick, secondClick)
-      if (!order) {
-        firstClick = [secondClick, firstClick = secondClick][0]
-      }
+      if (!order) firstClick = [secondClick, secondClick = firstClick][0]
       domHandler()
     }
 
