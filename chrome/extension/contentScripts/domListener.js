@@ -36,11 +36,11 @@
 
       const position = node1.compareDocumentPosition(node2)
 
-      if ((position && Node.DOCUMENT_POSITION_FOLLOWING)
-        || (position && Node.DOCUMENT_POSITION_CONTAINED_BY)) {
+      if ((position & Node.DOCUMENT_POSITION_FOLLOWING)
+        || (position & Node.DOCUMENT_POSITION_CONTAINED_BY)) {
         return -1
-      } else if ((position && Node.DOCUMENT_POSITION_PRECEDING)
-        || (position && Node.DOCUMENT_POSITION_CONTAINS)) {
+      } else if ((position & Node.DOCUMENT_POSITION_PRECEDING)
+        || (position & Node.DOCUMENT_POSITION_CONTAINS)) {
         return 1
       }
       return 0
@@ -69,10 +69,8 @@
     flagSize: 24,
     paintFlag: function (dom, offsetX, offsetY) {
       const icon = this.createFlag()
-      const xPosition = offsetX - dom.getBoundingClientRect().left - (this.flagSize / 2)
-      const yPosition = offsetY - dom.getBoundingClientRect().top - (this.flagSize / 2)
-      icon.style.left = `${xPosition}px`
-      icon.style.top = `${yPosition}px`
+      icon.style.left = `${offsetX - dom.getBoundingClientRect().left - (this.flagSize / 2)}px`
+      icon.style.top = `${offsetY - dom.getBoundingClientRect().top - (this.flagSize / 2)}px`
       this.flags.push(icon)
       dom.appendChild(icon)
       const style = domHelper.getStyle(dom, 'position')
@@ -80,6 +78,13 @@
     },
     clearPainting: function () {
       this.flags.map(el => el.remove())
+      this.flags = []
+    },
+    swapFlags: function () {
+      if (this.flags.length !== 2) return
+      const [a, b] = this.flags
+      a.getElementsByTagName('img')[0].setAttribute('src', this.imgUrl('end'))
+      b.getElementsByTagName('img')[0].setAttribute('src', this.imgUrl('begin'))
     },
     paintImage: (dom) => {
       // Todo: add border around image.
@@ -87,11 +92,12 @@
     },
     createFlag: function () {
       const name = !flag ? 'begin' : 'end'
-      const url = chrome.runtime.getURL(`img/${name}.png`)
+      const url = this.imgUrl(name)
       return domHelper.htmlToElement(`<div style="position: absolute; display: flex; z-index: 9999;">
           <img src="${url}" style="width: ${this.flagSize}px; height: ${this.flagSize}px; background: none;"/>
         </div>`, 'text/html')
-    }
+    },
+    imgUrl: name => chrome.runtime.getURL(`img/${name}.png`),
   }
 
   const domHandler = () => {
@@ -101,19 +107,25 @@
 
   const clickHandler = (e) => {
     const node = e.target || e.srcElement
+    if (!flag) paintHelper.clearPainting()
     if (!node) return
 
+    paintHelper.paintFlag(node, e.clientX, e.clientY)
+
     if (!flag) {
-      paintHelper.clearPainting()
       firstClick = node
     } else {
       secondClick = node
       order = domHelper.nodeInOrder(firstClick, secondClick)
-      if (!order) firstClick = [secondClick, secondClick = firstClick][0]
+      console.log('order: ', order)
+      if (order > 0) {
+        console.log(firstClick)
+        firstClick = [secondClick, secondClick = firstClick][0]
+        console.log(firstClick)
+        paintHelper.swapFlags()
+      }
       domHandler()
     }
-
-    paintHelper.paintFlag(node, e.clientX, e.clientY)
 
     flag = !flag
   }
