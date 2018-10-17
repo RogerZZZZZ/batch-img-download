@@ -4,12 +4,9 @@ import Root from '../../app/containers/Root';
 import './todoapp.css';
 
 const sendMessage = () => {
-  console.log('sssssss')
-
-  chrome.tabs.getCurrent((tab) => {
-    chrome.runtime.sendMessage(tab.id, {
-      data: 'Hello world!',
-      type: 'trigger',
+  chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      message: 'Hello world'
     }, response => console.log(response))
   })
 }
@@ -19,8 +16,6 @@ chrome.storage.local.get('state', (obj) => {
   const initialState = JSON.parse(state || '{}');
 
   const createStore = require('../../app/store/configureStore');
-
-  console.log('--------')
 
   ReactDOM.render(
     <Root store={createStore(initialState)} onTrigger={sendMessage} />,
