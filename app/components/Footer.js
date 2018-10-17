@@ -17,7 +17,8 @@ export default class Footer extends Component {
     activeCount: PropTypes.number.isRequired,
     filter: PropTypes.string.isRequired,
     onClearCompleted: PropTypes.func.isRequired,
-    onShow: PropTypes.func.isRequired
+    onShow: PropTypes.func.isRequired,
+    onTrigger: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
@@ -73,6 +74,15 @@ export default class Footer extends Component {
     }
   }
 
+  renderTriggerButton() {
+    const { onTrigger } = this.props;
+    return (
+      <li>
+        <button onClick={onTrigger}>Trigger</button>
+      </li>
+    )
+  }
+
   render() {
     return (
       <footer className={style.footer}>
@@ -83,6 +93,7 @@ export default class Footer extends Component {
               {this.renderFilterLink(filter, this.filterHandlers[i])}
             </li>
           )}
+          {this.renderTriggerButton()}
         </ul>
         {this.renderClearButton()}
       </footer>

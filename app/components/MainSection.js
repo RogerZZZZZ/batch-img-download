@@ -14,7 +14,8 @@ export default class MainSection extends Component {
 
   static propTypes = {
     todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    onTrigger: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
@@ -48,7 +49,7 @@ export default class MainSection extends Component {
   }
 
   renderFooter(completedCount) {
-    const { todos } = this.props;
+    const { todos, onTrigger } = this.props;
     const { filter } = this.state;
     const activeCount = todos.length - completedCount;
 
@@ -60,6 +61,7 @@ export default class MainSection extends Component {
           filter={filter}
           onClearCompleted={this.handleClearCompleted}
           onShow={this.handleShow}
+          onTrigger={onTrigger}
         />
       );
     }

@@ -18,16 +18,17 @@ export default class App extends Component {
 
   static propTypes = {
     todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    onTrigger: PropTypes.func.isRequired,
   };
 
   render() {
-    const { todos, actions } = this.props;
+    const { todos, actions, onTrigger } = this.props;
 
     return (
       <div className={style.normal}>
         <Header addTodo={actions.addTodo} />
-        <MainSection todos={todos} actions={actions} />
+        <MainSection todos={todos} actions={actions} onTrigger={onTrigger} />
       </div>
     );
   }

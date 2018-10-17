@@ -35,3 +35,10 @@ const clickHandler = (e) => {
 }
 
 window.document.addEventListener('click', clickHandler)
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log(request)
+  sendResponse({
+    result: 'response: Bye Bye'
+  })
+})
