@@ -1,4 +1,20 @@
-# React Chrome Extension Boilerplate
+# Batch Images Download - Chrome Extension
+
+## Todo
+
+- [ ] New tab to show images
+  - [x] New tab
+  - [ ] Load image and show on new tab
+  - [ ] If there is one open tab, just update instead of opening a new one.
+  - [ ] Provide batch download button
+    - [ ] Support user to select images to download
+  - [ ] Support user to remove images
+- [ ] Use button in popup to control work flow
+  - [ ] MODE_ONE: select begin and end
+    - [ ] Get all images in the selected scope
+    - [ ] Highlighten the image in selected scope
+  - [ ] MODE_TWO: selct picture one by one
+- [ ] Add shortcut for triggering extension.
 
 ## Installation
 
