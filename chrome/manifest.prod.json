@@ -19,13 +19,15 @@
   "background": {
     "page": "background.html"
   },
+  "chrome_url_overrides": {
+    "newtab": "tab.html"
+  },
   "content_scripts": [{
     "matches": [
-      "http://*/*",
-      "https://*/*"
+      "https://github.com/*"
     ],
     "js": [
-      "domListener.js"
+      "js/domListener.bundle.js"
     ],
     "run_at": "document_end"
   }],
