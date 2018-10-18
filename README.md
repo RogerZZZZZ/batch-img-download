@@ -5,6 +5,8 @@
 - [ ] New tab to show images
   - [x] New tab
   - [ ] Load image and show on new tab
+    - [x] Extract images
+    - [ ] show on new tab
   - [ ] If there is one open tab, just update instead of opening a new one.
   - [ ] Provide batch download button
     - [ ] Support user to select images to download

@@ -50,20 +50,20 @@ const domHelper = {
     return el.currentStyle[styleProp]
   },
   getImgs: function (root, begin, end, types) {
-    //Todo find specific nodes in root
     this.imgCollections = []
     this.beginFlag = false
     console.log(root)
     if (begin === end) {
       console.log('the same clicked node')
-      this.extractImgPath(begin, types)
+      this.walkDom(root, types, null, null)
+      console.log(this.imgCollections)
       return
     }
-    this.walkDom(root, begin, end, types)
+    this.walkDom(root, types, begin, end)
     console.log(this.imgCollections)
     return this.imgCollections
   },
-  walkDom: function(node, begin, end, types) {
+  walkDom: function(node, types, begin, end) {
     if (this.endFlag) return
     if (node === begin) this.beginFlag = true
     if (node === end) {
@@ -76,7 +76,7 @@ const domHelper = {
 
     node = node.firstChild
     while(node) {
-      this.walkDom(node, begin, end, types)
+      this.walkDom(node, types, begin, end)
       node = node.nextSibling
     }
   },
