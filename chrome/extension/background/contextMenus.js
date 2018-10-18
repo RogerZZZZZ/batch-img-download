@@ -39,6 +39,6 @@ chrome.contextMenus.onClicked.addListener(() => {
   //   popWindow('open');
   // }
   chrome.tabs.create({
-    url: 'chrome://newtab'
+    url: '../tab.html'
   })
 })

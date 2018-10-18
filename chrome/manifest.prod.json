@@ -19,9 +19,6 @@
   "background": {
     "page": "background.html"
   },
-  "chrome_url_overrides": {
-    "newtab": "tab.html"
-  },
   "content_scripts": [{
     "matches": [
       "https://github.com/*"
