@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from '../../app/containers/Root';
+import Root from 'APP/containers/Root';
 import './todoapp.css';
 
 const sendMessage = () => {
@@ -15,7 +15,7 @@ chrome.storage.local.get('state', (obj) => {
   const { state } = obj;
   const initialState = JSON.parse(state || '{}');
 
-  const createStore = require('../../app/store/configureStore');
+  const createStore = require('APP/store/configureStore');
 
   ReactDOM.render(
     <Root store={createStore(initialState)} onTrigger={sendMessage} />,

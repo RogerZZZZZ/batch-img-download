@@ -8,6 +8,13 @@
     "browser": true,
     "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack/base.config.js"
+      }
+    }
+  },
   "rules": {
     "no-console": 0,
     "semi": 0,
@@ -23,7 +30,11 @@
     "consistent-return": 0,
     "comma-dangle": 0,
     "spaced-comment": 0,
-    "global-require": 0
+    "global-require": 0,
+    "extension": "always",
+    "import/no-unresolved": "off",
+    "import/no-named-as-default-member": "off",
+    "import/no-mutable-exports": "off"
   },
   "plugins": [
     "react"

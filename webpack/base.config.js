@@ -17,7 +17,10 @@ module.exports = {
     chunkFilename: '[id].chunk.js'
   },
   resolve: {
-    extensions: ['*', '.js']
+    extensions: ['*', '.js'],
+    alias: {
+      APP: path.resolve(__dirname, 'app'),
+    },
   },
   module: {
     rules: [{
