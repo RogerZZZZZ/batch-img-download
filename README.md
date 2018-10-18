@@ -16,9 +16,9 @@
     - [ ] Highlighten the image in selected scope
   - [ ] MODE_TWO: selct picture one by one
 - [ ] Add shortcut for triggering extension.
-- [ ] Webpack issue
+- [x] Webpack issue
   - [x] Add base config and use webpack merge
-  - [ ] Add webpack alias
+  - [x] Add webpack alias
 
 ## Installation
 

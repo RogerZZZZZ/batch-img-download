@@ -1,4 +1,7 @@
 const domHelper = {
+  imgCollections: [],
+  beginFlag: false,
+  endFlag: false,
   contain: (refNode, otherNode) => {
     if (!otherNode || !refNode) return false
     let node = otherNode.parentNode
@@ -46,10 +49,52 @@ const domHelper = {
     }
     return el.currentStyle[styleProp]
   },
-  findTag: (root) => {
+  getImgs: function (root, begin, end, types) {
     //Todo find specific nodes in root
+    this.imgCollections = []
+    this.beginFlag = false
     console.log(root)
+    if (begin === end) {
+      console.log('the same clicked node')
+      this.extractImgPath(begin, types)
+      return
+    }
+    this.walkDom(root, begin, end, types)
+    console.log(this.imgCollections)
+    return this.imgCollections
   },
+  walkDom: function(node, begin, end, types) {
+    if (this.endFlag) return
+    if (node === begin) this.beginFlag = true
+    if (node === end) {
+      this.beginFlag = false
+      this.endFlag = true
+      return
+    }
+
+    this.extractImgPath(node, types)
+
+    node = node.firstChild
+    while(node) {
+      this.walkDom(node, begin, end, types)
+      node = node.nextSibling
+    }
+  },
+  extractImgPath: function (node, types) {
+    const tag = node.tagName
+    if (types.indexOf('img') > -1 && tag === 'IMG') {
+      const url = node.getAttribute('src')
+      if (url && url !== '') this.imgCollections.push(url)
+    }
+    if (types.indexOf('background') > -1) {
+      const style = node.currentStyle || window.getComputedStyle(node, false)
+      const imgStyle = style.backgroundImage
+      if (imgStyle) {
+        const url = imgStyle.slice(4, -1).replace(/"/g, "")
+        if(url) this.imgCollections.push(url)
+      }
+    }
+  }
 }
 
 export default domHelper

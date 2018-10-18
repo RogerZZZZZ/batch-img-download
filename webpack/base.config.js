@@ -19,7 +19,7 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js'],
     alias: {
-      APP: path.resolve(__dirname, 'app'),
+      APP: path.resolve(__dirname, '../app'),
     },
   },
   module: {

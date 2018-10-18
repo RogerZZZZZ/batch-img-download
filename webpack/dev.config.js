@@ -21,8 +21,7 @@ const baseDevConfig = webpackMerge(baseConfig, {
     }),
   ],
 })
-
-const injectPageConfig = baseDevConfig;
+const injectPageConfig = Object.assign({}, baseDevConfig);
 injectPageConfig.entry = [
   customPath,
   path.join(__dirname, '../chrome/extension/inject')
@@ -34,7 +33,7 @@ injectPageConfig.output = {
   path: path.join(__dirname, '../dev/js'),
   filename: 'inject.bundle.js',
 };
-const appConfig = baseDevConfig;
+const appConfig = baseDevConfig
 
 module.exports = [
   injectPageConfig,

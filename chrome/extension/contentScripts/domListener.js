@@ -10,7 +10,8 @@ console.log('trigger')
 
 const domHandler = () => {
   console.log(firstClick, secondClick)
-  console.log(domHelper.findAncestor(firstClick, secondClick))
+  const ancestor = domHelper.findAncestor(firstClick, secondClick)
+  const imgs = domHelper.getImgs(ancestor, firstClick, secondClick, ['img'])
 }
 
 const clickHandler = (e) => {
