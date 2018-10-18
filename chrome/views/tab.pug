@@ -1,0 +1,13 @@
+doctype html
+
+html
+  head
+    meta(charset='UTF-8')
+    title new tab
+    style.
+
+  body
+    #root
+    if env !== 'prod'
+      script(src='chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/redux-devtools-extension.js')
+    script(src='/js/tab.bundle.js')

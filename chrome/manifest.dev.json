@@ -28,6 +28,9 @@
     ],
     "run_at": "document_end"
   }],
+  "chrome_url_overrides": {
+    "tab": "tab.html"
+  },
   "permissions": [
     "contextMenus",
     "management",
