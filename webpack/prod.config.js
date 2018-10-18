@@ -10,6 +10,7 @@ module.exports = {
     background: [customPath, path.join(__dirname, '../chrome/extension/background')],
     inject: [customPath, path.join(__dirname, '../chrome/extension/inject')],
     domListener: [customPath, path.join(__dirname, '../chrome/extension/contentScripts/domListener')],
+    tab: [customPath, path.join(__dirname, '../chrome/extension/tab/tab')],
   },
   output: {
     path: path.join(__dirname, '../build/js'),
