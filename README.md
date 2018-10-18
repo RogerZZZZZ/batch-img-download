@@ -20,7 +20,7 @@
 
 ```bash
 # clone it
-$ git clone https://github.com/jhen0409/react-chrome-extension-boilerplate.git
+$ git clone git@github.com:RogerZZZZZ/batch-img-download.git
 
 # Install dependencies
 $ npm install
