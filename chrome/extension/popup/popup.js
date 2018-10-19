@@ -9,6 +9,6 @@ const runExtract = (conf) => {
 }
 
 ReactDOM.render(
-  <PopUp run={runExtract}/>,
+  <PopUp runExtract={runExtract}/>,
   document.querySelector('#root')
 )

@@ -6,6 +6,7 @@
 .header {
   position: relative;
   align-items: center;
+  padding: 10px 0;
 }
 
 .headerIcon {
@@ -14,4 +15,14 @@
   margin-left: -12px;
   width: 24px;
   height: 24px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-item {
+  margin: 5px 0;
 }

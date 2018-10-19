@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { Checkbox } from 'element-react'
+import React, { Component, PropTypes } from 'react';
+import { Checkbox, Button } from 'element-react'
 import 'element-theme-default'
 import './PopUp.css'
 
 export default class PopUp extends Component {
 
   static propTypes = {
+    runExtract: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
@@ -14,6 +15,14 @@ export default class PopUp extends Component {
       options: ['Image', 'Background'],
       checked: ['Image'],
     };
+  }
+
+  run(type) {
+    const config = {
+      options: this.state.options,
+      type,
+    }
+    this.props.runExtract(config)
   }
 
   render() {
@@ -34,6 +43,14 @@ export default class PopUp extends Component {
               })
             }
           </Checkbox.Group>
+        </div>
+        <div className="button-container">
+          <div>
+            <Button onClick={this.run.bind(this, 'single')} className="button-item">Single</Button>
+          </div>
+          <div>
+            <Button onClick={this.run.bind(this, 'scope')} className="button-item">Scope</Button>
+          </div>
         </div>
       </div>
     );
