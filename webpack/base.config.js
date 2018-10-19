@@ -6,7 +6,7 @@ const customPath = path.join(__dirname, './customPublicPath');
 module.exports = {
   devtool: 'eval-cheap-module-source-map',
   entry: {
-    todoapp: [customPath, path.join(__dirname, '../chrome/extension/todoapp')],
+    popup: [customPath, path.join(__dirname, '../chrome/extension/popup/popup')],
     background: [customPath, path.join(__dirname, '../chrome/extension/background')],
     domListener: [customPath, path.join(__dirname, '../chrome/extension/contentScripts/domListener')],
     tab: [customPath, path.join(__dirname, '../chrome/extension/tab/tab')],
@@ -34,7 +34,7 @@ module.exports = {
       test: /\.css$/,
       use: [
         'style-loader',
-        'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+        'css-loader',
         {
           loader: 'postcss-loader',
           options: {
@@ -42,6 +42,10 @@ module.exports = {
           }
         }
       ]
-    }]
+    }, { 
+      test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+      loader: 'file-loader?name=[path][name].[ext]',
+    }
+  ]
   },
 }
