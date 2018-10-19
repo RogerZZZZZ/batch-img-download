@@ -1,1 +1,17 @@
-@import 'element-theme-default'
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: relative;
+  align-items: center;
+}
+
+.headerIcon {
+  position: relative;
+  left: 50%;
+  margin-left: -12px;
+  width: 24px;
+  height: 24px;
+}
