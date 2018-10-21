@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
-import * as TodoActions from '../actions/todos';
+import * as ImageActions from '../actions/images'
+
 
 @connect(
   state => ({
-    todos: state.todos
+    images: state.images
   }),
   dispatch => ({
-    actions: bindActionCreators(TodoActions, dispatch)
+    actions: bindActionCreators(ImageActions, dispatch)
   })
 )
 export default class Tab extends Component {
@@ -19,11 +19,17 @@ export default class Tab extends Component {
   };
 
   render() {
-    const { actions } = this.props;
+    const { actions, images } = this.props;
+
+    console.log('------', images)
 
     return (
       <div>
-        <Header addTodo={actions.addTodo} />
+        {
+          images.map((image, idx) => 
+            <img src={image.src} key={idx}/>
+          )
+        }
       </div>
     );
   }

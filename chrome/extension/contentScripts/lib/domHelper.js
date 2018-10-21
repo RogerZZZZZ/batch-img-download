@@ -82,11 +82,11 @@ const domHelper = {
   },
   extractImgPath: function (node, types) {
     const tag = node.tagName
-    if (types.indexOf('img') > -1 && tag === 'IMG') {
+    if (types.indexOf('Image') > -1 && tag === 'IMG') {
       const url = node.getAttribute('src')
       if (url && url !== '') this.imgCollections.push(url)
     }
-    if (types.indexOf('background') > -1) {
+    if (types.indexOf('Background') > -1) {
       const style = node.currentStyle || window.getComputedStyle(node, false)
       const imgStyle = style.backgroundImage
       if (imgStyle) {

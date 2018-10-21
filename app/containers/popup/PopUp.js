@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import { Checkbox, Button } from 'element-react'
 import 'element-theme-default'
 import './PopUp.css'

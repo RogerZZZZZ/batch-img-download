@@ -5,6 +5,7 @@ import './tab.css'
 
 chrome.storage.local.get('state', (obj) => {
   const { state } = obj;
+  console.log('state', state)
   const initialState = JSON.parse(state || '{}');
 
   const createStore = require('APP/store/configureStore');

@@ -1,6 +1,7 @@
 (function () {
   const domHelper = require('./lib/domHelper')
   const painter = require('./lib/painter')
+  const store = require('./lib/store')
   
   let firstClick_ = null
   let secondClick_ = null
@@ -11,10 +12,9 @@
   console.log('trigger')
   
   const domHandler = function() {
-    console.log(firstClick_, secondClick_)
     const ancestor = domHelper.findAncestor(firstClick_, secondClick_)
-    const conf = config_ || config_.checked || ['img']
-    const imgs = domHelper.getImgs(ancestor, firstClick_, secondClick_, conf)
+    const conf = config_.checked || ['Image']
+    store.save(domHelper.getImgs(ancestor, firstClick_, secondClick_, conf))
   }
   
   const clickHandler = (e) => {
@@ -43,7 +43,7 @@
   window.document.addEventListener('click', clickHandler)
   
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    this.config = request
+    config_ = request
     controlFlag_ = true
     sendResponse({
       result: 'response: Bye Bye'
