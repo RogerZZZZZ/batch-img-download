@@ -19,7 +19,7 @@ export default class PopUp extends Component {
 
   run(type) {
     const config = {
-      options: this.state.options,
+      checked: this.state.checked,
       type,
     }
     this.props.runExtract(config)

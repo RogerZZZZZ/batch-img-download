@@ -14,7 +14,7 @@
 - [ ] Use button in popup to control work flow
   - [ ] Design and implement popup window
   - [ ] MODE_ONE: select begin and end
-    - [ ] Get all images in the selected scope
+    - [x] Get all images in the selected scope
     - [ ] Highlighten the image in selected scope
   - [ ] MODE_TWO: selct picture one by one
 - [ ] Add shortcut for triggering extension.
