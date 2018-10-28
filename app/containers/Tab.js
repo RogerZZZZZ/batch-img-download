@@ -18,6 +18,13 @@ export default class Tab extends Component {
     actions: PropTypes.object.isRequired,
   };
 
+  initData(src) {
+    return {
+      src,
+      select: false,
+    }
+  }
+
   render() {
     const { actions, images } = this.props;
 
