@@ -52,17 +52,14 @@ const domHelper = {
   getImgs: function (root, begin, end, types) {
     this.imgCollections = []
     this.beginFlag = false
-    console.log(root)
     if (begin === end) {
-      console.log('the same clicked node')
       this.walkDom(root, types, null, null)
-      console.log(this.imgCollections)
       return
     }
     this.walkDom(root, types, begin, end)
-    console.log(this.imgCollections)
-    return this.imgCollections
+    return this.deleteDuplication(this.imgCollections)
   },
+  deleteDuplication: (arr) => [...new Set(arr)],
   walkDom: function(node, types, begin, end) {
     if (this.endFlag) return
     if (node === begin) this.beginFlag = true

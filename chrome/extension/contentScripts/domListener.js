@@ -9,8 +9,6 @@
   let controlFlag_ = false
   let config_ = null
   
-  console.log('trigger')
-  
   const domHandler = function() {
     const ancestor = domHelper.findAncestor(firstClick_, secondClick_)
     const conf = config_.checked || ['Image']

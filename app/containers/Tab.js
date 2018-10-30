@@ -4,7 +4,7 @@ import ImageWall from '../components/tab/ImageWall'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ImageActions from '../actions/images'
-
+import 'element-theme-default'
 
 @connect(
   state => ({
