@@ -1,0 +1,10 @@
+.image-holder {
+  position: relative;
+  padding: 20px;
+}
+
+.image-item {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}

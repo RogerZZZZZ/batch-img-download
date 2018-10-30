@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Checkbox } from 'element-react'
+import 'element-theme-default'
+import './ImageHolder.css'
 import images from '../../reducers/images';
+
 
 
 export default class ImageHolder extends Component {

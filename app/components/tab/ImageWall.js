@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImageHolder from './ImageHolder'
+import './ImageWall.css'
 
 export default class ImageWall extends Component {
 
