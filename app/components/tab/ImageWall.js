@@ -20,7 +20,6 @@ export default class ImageWall extends Component {
             )
           })
         }
-        <img id="hidden-image" className="hidden-image"/>
       </div>
     )
   }

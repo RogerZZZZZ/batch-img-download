@@ -1,8 +1,14 @@
 /**
  * Contain functions to download files.
  */
+import saveAs from 'file-saver'
 
-export const downloadFromUrl = (url) => {
+const getFileFormat = (name) => {
+  const arr = name.split('.')
+  return arr[arr.length - 1]
+}
+
+export const downloadFromUrl = (url, idx) => {
   return new Promise(resolver => {
     const xhr = new XMLHttpRequest()
     xhr.onreadystatechange = () => {
@@ -10,8 +16,7 @@ export const downloadFromUrl = (url) => {
         const blob = new Blob([xhr.response], {
           type: xhr.getResponseHeader('Content-Type')
         })
-        const imgUrl = window.URL.createObjectURL(blob)
-        document.getElementById('hidden-image').src = imgUrl
+        saveAs(blob, `${idx}.${getFileFormat(url)}`)
         resolver(xhr.response)
       }
     }

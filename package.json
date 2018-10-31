@@ -53,6 +53,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.5.0",
     "file-loader": "^2.0.0",
+    "file-saver": "^2.0.0-rc.4",
     "jsdom": "^9.2.1",
     "minimist": "^1.2.0",
     "mocha": "^5.2.0",
