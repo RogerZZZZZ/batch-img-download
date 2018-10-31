@@ -4,8 +4,6 @@ import 'element-theme-default'
 import './ImageHolder.css'
 import images from '../../reducers/images';
 
-
-
 export default class ImageHolder extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,

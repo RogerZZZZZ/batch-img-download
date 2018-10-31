@@ -13,6 +13,7 @@
     const ancestor = domHelper.findAncestor(firstClick_, secondClick_)
     const conf = config_.checked || ['Image']
     store.save(domHelper.getImgs(ancestor, firstClick_, secondClick_, conf))
+    window.document.removeEventListener('click', clickHandler, true)
   }
   
   const clickHandler = (e) => {
@@ -38,7 +39,7 @@
     flag_ = !flag_
   }
   
-  window.document.addEventListener('click', clickHandler)
+  window.document.addEventListener('click', clickHandler, true)
   
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     config_ = request

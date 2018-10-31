@@ -6,13 +6,14 @@
   - [x] New tab
   - [ ] Load image and show on new tab
     - [x] Extract images
-    - [ ] show on new tab
+    - [x] show on new tab
+    - [ ] After select images directly show on new tab
   - [ ] If there is one open tab, just update instead of opening a new one.
   - [ ] Provide batch download button
-    - [ ] Support user to select images to download
+    - [x] Support user to select images to download
   - [ ] Support user to remove images
 - [ ] Use button in popup to control work flow
-  - [ ] Design and implement popup window
+  - [x] Design and implement popup window
   - [ ] MODE_ONE: select begin and end
     - [x] Get all images in the selected scope
     - [ ] Highlighten the image in selected scope
