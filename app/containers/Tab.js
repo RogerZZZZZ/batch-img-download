@@ -47,8 +47,7 @@ export default class Tab extends Component {
       if (el.checked) arr.push(el.src)
       return arr
     }, [])
-    console.log(waitingList)
-    Promise.all(waitingList.map(downloadFromUrl)).then(() => console.log('ssss'))
+    Promise.all(waitingList.map(downloadFromUrl)).then(() => console.log('successfully download'))
   }
 
   render() {

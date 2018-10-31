@@ -20,9 +20,10 @@ export const downloadFromUrl = (url, idx) => {
         resolver(xhr.response)
       }
     }
-    console.log('download1111', url)
-    xhr.responseType = "arraybuffer";
     xhr.open('GET', url, true)
+    xhr.responseType = "arraybuffer"
+    // TODO: CORS problem
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
     xhr.send()
   })
 }
