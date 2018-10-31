@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImageHolder from './ImageHolder'
 import './ImageWall.css'
+import images from '../../reducers/images';
 
 export default class ImageWall extends Component {
 
@@ -19,6 +20,7 @@ export default class ImageWall extends Component {
             )
           })
         }
+        <img id="hidden-image" className="hidden-image"/>
       </div>
     )
   }

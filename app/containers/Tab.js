@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ImageActions from '../actions/images'
 import 'element-theme-default'
+import { downloadFromUrl } from '../lib/download'
 
 @connect(
   state => ({
@@ -42,7 +43,12 @@ export default class Tab extends Component {
   }
 
   download () {
-    console.log(this.state)
+    const waitingList = this.state.list.reduce((arr, el) => {
+      if (el.checked) arr.push(el.src)
+      return arr
+    }, [])
+    console.log(waitingList)
+    Promise.all(waitingList.map(downloadFromUrl)).then(() => console.log('ssss'))
   }
 
   render() {
