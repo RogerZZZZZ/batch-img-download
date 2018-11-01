@@ -9,11 +9,26 @@
   let controlFlag_ = false
   let config_ = null
   
+  const directToTab = (imageSize) => {
+    console.log('send message')
+    chrome.runtime.sendMessage({
+      type: 'open_tab',
+      options: {
+        type: 'basic',
+        iconUrl: chrome.extension.getURL('icon-128.png'),
+        title: 'Grab images',
+        message: `Successful get ${imageSize} images`
+      }
+    })
+  }
+
   const domHandler = function() {
     const ancestor = domHelper.findAncestor(firstClick_, secondClick_)
     const conf = config_.checked || ['Image']
-    store.save(domHelper.getImgs(ancestor, firstClick_, secondClick_, conf))
+    const imgs = domHelper.getImgs(ancestor, firstClick_, secondClick_, conf)
+    store.save(imgs)
     window.document.removeEventListener('click', clickHandler, true)
+    directToTab(imgs.length)
   }
   
   const clickHandler = (e) => {

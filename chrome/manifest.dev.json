@@ -17,7 +17,7 @@
     "img/*.png"
   ],
   "background": {
-    "page": "background.html"
+    "scripts": ["js/background.bundle.js"]
   },
   "content_scripts": [{
     "matches": [
@@ -31,6 +31,7 @@
   "permissions": [
     "contextMenus",
     "management",
+    "notifications",
     "tabs",
     "storage",
     "https://github.com/*"

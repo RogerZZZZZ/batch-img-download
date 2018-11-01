@@ -22,10 +22,6 @@ const painter = {
     a.getElementsByTagName('img')[0].setAttribute('src', this.imgUrl('end'))
     b.getElementsByTagName('img')[0].setAttribute('src', this.imgUrl('begin'))
   },
-  paintImage: (dom) => {
-    // Todo: add border around image.
-    console.log(dom)
-  },
   createFlag: function (flag) {
     const name = !flag ? 'begin' : 'end'
     const url = this.imgUrl(name)

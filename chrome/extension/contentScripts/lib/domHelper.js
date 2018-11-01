@@ -81,7 +81,10 @@ const domHelper = {
     const tag = node.tagName
     if (types.indexOf('Image') > -1 && tag === 'IMG') {
       const url = node.getAttribute('src')
-      if (url && url !== '') this.imgCollections.push(url)
+      if (url && url !== '') {
+        this.imgCollections.push(url)
+        // tag.style.border = '1px solid #0366d6'
+      }
     }
     if (types.indexOf('Background') > -1) {
       const style = node.currentStyle || window.getComputedStyle(node, false)
