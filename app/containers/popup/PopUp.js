@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Checkbox, Button } from 'element-react'
+import { Checkbox, Button, Radio } from 'element-react'
+import SettingItem from 'APP/components/popup/SettingItem'
 import 'element-theme-default'
 import './PopUp.css'
 
@@ -14,6 +15,8 @@ export default class PopUp extends Component {
     this.state = {
       options: ['Image', 'Background'],
       checked: ['Image'],
+      modes: ['Single Select', 'Scope Select'],
+      currMode: 'Single Select',
     };
   }
 
@@ -25,31 +28,46 @@ export default class PopUp extends Component {
     this.props.runExtract(config)
   }
 
+  modeSelect(val) {
+    this.setState({
+      currMode: val,
+    })
+  }
+
   render() {
     return (
       <div className="container">
         <div className='header'>
-          <img src="img/download.png" className='headerIcon'/>
+          <img src="img/download.png" className='header-icon'/>
         </div>
-        <div>
-          <Checkbox.Group value={this.state.checked}>
-            {
-              this.state.options.map((opt, idx) => {
-                return (
-                  <Checkbox.Button key={idx} label={opt}>
-                    {opt}
-                  </Checkbox.Button>
-                )
-              })
-            }
-          </Checkbox.Group>
-        </div>
-        <div className="button-container">
+        <div className="setting-container">
+          <SettingItem title="Image Sources">
+            <Checkbox.Group value={this.state.checked}>
+              {
+                this.state.options.map((opt, idx) => {
+                  return (
+                    <Checkbox.Button key={idx} label={opt}>{opt}</Checkbox.Button>
+                  )
+                })
+              }
+            </Checkbox.Group>
+          </SettingItem>
+
+          <SettingItem title="Mode Select">
+            <Radio.Group value={this.state.currMode} onChange={this.modeSelect.bind(this)}>
+                {
+                  this.state.modes.map((mode, idx) => {
+                    return (
+                      <Radio.Button key={idx} value={mode}>{mode}</Radio.Button>
+                    )
+                  })
+                }
+              </Radio.Group>
+          </SettingItem>
+          
+            {/* <Button onClick={this.run.bind(this, 'single')} className="button-item">Single</Button> */}
           <div>
-            <Button onClick={this.run.bind(this, 'single')} className="button-item">Single</Button>
-          </div>
-          <div>
-            <Button onClick={this.run.bind(this, 'scope')} className="button-item">Scope</Button>
+            <Button onClick={this.run.bind(this)} className="button-item"></Button>
           </div>
         </div>
       </div>
