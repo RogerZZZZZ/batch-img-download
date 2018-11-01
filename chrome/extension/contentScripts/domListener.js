@@ -24,7 +24,7 @@
 
   const domHandler = function() {
     const ancestor = domHelper.findAncestor(firstClick_, secondClick_)
-    const conf = config_.checked || ['Image']
+    const conf = config_.sources || ['Image']
     const imgs = domHelper.getImgs(ancestor, firstClick_, secondClick_, conf)
     store.save(imgs)
     window.document.removeEventListener('click', clickHandler, true)
@@ -54,13 +54,10 @@
     flag_ = !flag_
   }
   
-  window.document.addEventListener('click', clickHandler, true)
   
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     config_ = request
     controlFlag_ = true
-    sendResponse({
-      result: 'response: Bye Bye'
-    })
+    window.document.addEventListener('click', clickHandler, true)
   })
 })()

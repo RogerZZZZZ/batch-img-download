@@ -21,21 +21,8 @@ const baseDevConfig = webpackMerge(baseConfig, {
     }),
   ],
 })
-const injectPageConfig = Object.assign({}, baseDevConfig);
-injectPageConfig.entry = [
-  customPath,
-  path.join(__dirname, '../chrome/extension/inject')
-];
-delete injectPageConfig.hotMiddleware;
-delete injectPageConfig.module.rules[0].options;
-injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
-injectPageConfig.output = {
-  path: path.join(__dirname, '../dev/js'),
-  filename: 'inject.bundle.js',
-};
 const appConfig = baseDevConfig
 
 module.exports = [
-  injectPageConfig,
   appConfig
 ];

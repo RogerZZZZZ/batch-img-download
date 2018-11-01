@@ -14,18 +14,25 @@ export default class PopUp extends Component {
     super(props, context);
     this.state = {
       options: ['Image', 'Background'],
-      checked: ['Image'],
+      source: ['Image'],
       modes: ['Single Select', 'Scope Select'],
       currMode: 'Single Select',
     };
   }
 
-  run(type) {
+  run() {
     const config = {
-      checked: this.state.checked,
-      type,
+      sources: this.state.source,
+      mode: this.state.currMode,
     }
     this.props.runExtract(config)
+    // window.close()
+  }
+
+  sourceSelect(val) {
+    this.setState({
+      source: val,
+    })
   }
 
   modeSelect(val) {
@@ -42,7 +49,7 @@ export default class PopUp extends Component {
         </div>
         <div className="setting-container">
           <SettingItem title="Image Sources">
-            <Checkbox.Group value={this.state.checked}>
+            <Checkbox.Group value={this.state.source} onChange={this.sourceSelect.bind(this)}>
               {
                 this.state.options.map((opt, idx) => {
                   return (
@@ -64,11 +71,10 @@ export default class PopUp extends Component {
                 }
               </Radio.Group>
           </SettingItem>
-          
-            {/* <Button onClick={this.run.bind(this, 'single')} className="button-item">Single</Button> */}
-          <div>
-            <Button onClick={this.run.bind(this)} className="button-item"></Button>
-          </div>
+        </div>
+
+        <div className="bottom-container">
+          <Button onClick={this.run.bind(this)}>OK</Button>
         </div>
       </div>
     );
