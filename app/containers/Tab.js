@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Button } from 'element-react'
+import { Button, Message } from 'element-react'
 import ImageWall from '../components/tab/ImageWall'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -25,21 +25,29 @@ export default class Tab extends Component {
     checked: PropTypes.func,
   }
 
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      list: this.props.images.map(el => Object.assign(el, {checked: false}))
+    }
+    this.showMessage(`Successfully load ${this.props.images.length} pictures`, 'success')
+  }
+
   getChildContext() {
     return {
       checked: this.chooseImage.bind(this),
     }
   }
 
-  chooseImage (checked, idx) {
-    this.state.list[idx].checked = checked
+  showMessage(message, type) {
+    Message({
+      message,
+      type,
+    })
   }
 
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      list: this.props.images.map(el => Object.assign(el, {checked: false}))
-    }
+  chooseImage (checked, idx) {
+    this.state.list[idx].checked = checked
   }
 
   download () {
@@ -47,7 +55,10 @@ export default class Tab extends Component {
       if (el.checked) arr.push(el.src)
       return arr
     }, [])
-    Promise.all(waitingList.map(downloadFromUrl)).then(() => console.log('successfully download'))
+    Promise.all(waitingList.map(downloadFromUrl)).then((e) => {
+      this.showMessage(`Successfully download pictures`)
+      console.log('successfully download', e)
+    })
   }
 
   render() {

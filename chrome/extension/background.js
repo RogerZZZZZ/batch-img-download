@@ -33,12 +33,9 @@ require('./background/badge');
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'open_tab') {
-    chrome.notifications.create('worktimer-notification', request.options, () => {})
-    setTimeout(() => {
-      chrome.tabs.create({
-        url: '../tab.html'
-      })
-    }, 2000)
+    chrome.tabs.create({
+      url: '../tab.html'
+    })
   }
   sendResponse()
 })

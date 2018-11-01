@@ -52,6 +52,7 @@ const domHelper = {
   getImgs: function (root, begin, end, types) {
     this.imgCollections = []
     this.beginFlag = false
+    this.endFlag = false
     if (begin === end) {
       this.walkDom(root, types, null, null)
       return

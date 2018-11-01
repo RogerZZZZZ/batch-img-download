@@ -4,7 +4,7 @@ import PopUp from 'APP/containers/popup/PopUp';
 
 const runExtract = (conf) => {
   chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, conf, response => console.log(response))
+    chrome.tabs.sendMessage(tabs[0].id, conf, response => window.close())
   })
 }
 

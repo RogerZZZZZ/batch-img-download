@@ -10,15 +10,8 @@
   let config_ = null
   
   const directToTab = (imageSize) => {
-    console.log('send message')
     chrome.runtime.sendMessage({
       type: 'open_tab',
-      options: {
-        type: 'basic',
-        iconUrl: chrome.extension.getURL('icon-128.png'),
-        title: 'Grab images',
-        message: `Successful get ${imageSize} images`
-      }
     })
   }
 
@@ -27,7 +20,7 @@
     const conf = config_.sources || ['Image']
     const imgs = domHelper.getImgs(ancestor, firstClick_, secondClick_, conf)
     store.save(imgs)
-    window.document.removeEventListener('click', clickHandler, true)
+    window.document.removeEventListener('click', clickHandler)
     directToTab(imgs.length)
   }
   
@@ -58,6 +51,11 @@
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     config_ = request
     controlFlag_ = true
-    window.document.addEventListener('click', clickHandler, true)
+    flag_ = false
+    painter.clearPainting()
+    firstClick_ = null
+    secondClick_ = null
+    window.document.addEventListener('click', clickHandler)
+    sendResponse()
   })
 })()

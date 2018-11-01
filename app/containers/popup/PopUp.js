@@ -26,7 +26,6 @@ export default class PopUp extends Component {
       mode: this.state.currMode,
     }
     this.props.runExtract(config)
-    // window.close()
   }
 
   sourceSelect(val) {
