@@ -4,12 +4,11 @@
 
 - [ ] New tab to show images
   - [x] New tab
-  - [ ] Load image and show on new tab
+  - [x] Load image and show on new tab
     - [x] Extract images
     - [x] show on new tab
-    - [ ] After select images directly show on new tab
-  - [ ] If there is one open tab, just update instead of opening a new one.
-  - [ ] Provide batch download button
+    - [x] After select images directly show on new tab
+  - [x] Provide batch download button
     - [x] Support user to select images to download
   - [ ] Support user to remove images
 - [ ] Use button in popup to control work flow
