@@ -13,9 +13,9 @@
   - [ ] Support user to remove images
 - [ ] Use button in popup to control work flow
   - [x] Design and implement popup window
-  - [ ] MODE_ONE: select begin and end
+  - [x] MODE_ONE: select begin and end
     - [x] Get all images in the selected scope
-    - [ ] Highlighten the image in selected scope
+    - [x] Highlighten the image in selected scope
   - [ ] MODE_TWO: selct picture one by one
 - [ ] Add shortcut for triggering extension.
 - [x] Webpack issue

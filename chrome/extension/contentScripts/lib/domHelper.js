@@ -84,7 +84,7 @@ const domHelper = {
       const url = node.getAttribute('src')
       if (url && url !== '') {
         this.imgCollections.push(url)
-        // tag.style.border = '1px solid #0366d6'
+        node.style.border = '2px solid #0366d6'
       }
     }
     if (types.indexOf('Background') > -1) {
