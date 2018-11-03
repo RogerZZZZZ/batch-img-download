@@ -1,2 +1,3 @@
 export const ADD_IMAGES = 'ADD_IMAGES'
 export const REMOVE_IMAGES = 'REMOVE_IMAGES'
+export const CLEAR_IMAGES = 'CLEAR_IMAGES'

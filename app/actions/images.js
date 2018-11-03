@@ -13,3 +13,9 @@ export function removeImage(image) {
     image,
   }
 }
+
+export function clearImages() {
+  return {
+    type: types.CLEAR_IMAGES,
+  }
+}

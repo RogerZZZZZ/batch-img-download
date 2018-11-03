@@ -61,6 +61,10 @@ export default class Tab extends Component {
     })
   }
 
+  clearImages() {
+    this.props.actions.clearImages()
+  }
+
   render() {
     const { actions, images } = this.props;
 
@@ -69,6 +73,8 @@ export default class Tab extends Component {
         <ImageWall datas={images}/>
 
         <Button onClick={this.download.bind(this)}>Download</Button>
+
+        <Button onClick={this.clearImages.bind(this)}>Clear</Button>
       </div>
     );
   }

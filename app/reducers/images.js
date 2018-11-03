@@ -11,6 +11,9 @@ const actionMaps = {
   [ImageAction.REMOVE_IMAGES](state, action) {
     return state.filter(el => el.id !== action.id)
   },
+  [ImageAction.CLEAR_IMAGES]() {
+    return []
+  }
 }
 
 export default function images(state = initState, action) {
