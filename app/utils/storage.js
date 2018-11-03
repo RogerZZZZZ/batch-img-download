@@ -15,7 +15,7 @@ export default function () {
     const store = next(reducer, initialState);
     store.subscribe(() => {
       const state = store.getState();
-      saveState(state);
+      // saveState(state);
       setBadge(state.todos);
     });
     return store;

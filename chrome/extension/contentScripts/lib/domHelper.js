@@ -1,3 +1,5 @@
+import pathHelper from './pathHelper'
+
 const domHelper = {
   imgCollections: [],
   beginFlag: false,
@@ -83,7 +85,7 @@ const domHelper = {
     if (types.indexOf('Image') > -1 && tag === 'IMG') {
       const url = node.getAttribute('src')
       if (url && url !== '') {
-        this.imgCollections.push(url)
+        this.imgCollections.push(pathHelper.getCorrectUrl(url))
         node.style.border = '2px solid #0366d6'
       }
     }
@@ -92,7 +94,7 @@ const domHelper = {
       const imgStyle = style.backgroundImage
       if (imgStyle) {
         const url = imgStyle.slice(4, -1).replace(/"/g, "")
-        if(url) this.imgCollections.push(url)
+        if(url) this.imgCollections.push(pathHelper.getCorrectUrl(url))
       }
     }
   }

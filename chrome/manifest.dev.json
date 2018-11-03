@@ -20,7 +20,7 @@
   },
   "content_scripts": [{
     "matches": [
-      "https://github.com/*"
+      "<all_urls>"
     ],
     "js": [
       "js/domListener.bundle.js"
@@ -33,7 +33,7 @@
     "notifications",
     "tabs",
     "storage",
-    "https://github.com/*"
+    "<all_urls>"
   ],
   "content_security_policy": "script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src * ; style-src * 'unsafe-inline' 'self' blob:;"
 }

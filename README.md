@@ -21,6 +21,8 @@
 - [x] Webpack issue
   - [x] Add base config and use webpack merge
   - [x] Add webpack alias
+- [ ] Other issues
+  - [x] image src is relative path.
 
 ## Installation
 
