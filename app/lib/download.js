@@ -16,7 +16,7 @@ export const downloadFromUrl = (url, idx) => {
         const blob = new Blob([xhr.response], {
           type: xhr.getResponseHeader('Content-Type')
         })
-        saveAs(blob, `${idx}.${getFileFormat(url)}`)
+        saveAs(blob, `${idx + 1}.${getFileFormat(url)}`)
         resolver(xhr.response)
       }
     }

@@ -1,10 +1,17 @@
 .image-holder {
   position: relative;
+  float: left;
   padding: 20px;
 }
 
 .image-item {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   cursor: pointer;
+}
+
+.operation-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

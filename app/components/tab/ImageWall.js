@@ -16,7 +16,7 @@ export default class ImageWall extends Component {
         {
           datas.map((data, idx) => {
             return (
-              <ImageHolder data={data} key={idx}/>
+              <ImageHolder data={data} key={idx} idx={idx}/>
             )
           })
         }
