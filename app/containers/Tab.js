@@ -7,6 +7,8 @@ import * as ImageActions from '../actions/images'
 import 'element-theme-default'
 import { downloadFromUrl } from '../lib/download'
 
+import './Tab.css'
+
 @connect(
   state => ({
     images: state.images
@@ -101,11 +103,13 @@ export default class Tab extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <ImageWall datas={this.state.list}/>
 
-        <Button onClick={this.download.bind(this)}>Download</Button>
-        <Button onClick={this.clearImages.bind(this)}>Clear</Button>
+        <div className="operation-area">
+          <Button onClick={this.download.bind(this)}>Download All</Button>
+          <Button onClick={this.clearImages.bind(this)}>Clear All</Button>
+        </div>
       </div>
     );
   }
