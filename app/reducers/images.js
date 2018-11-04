@@ -8,8 +8,9 @@ const actionMaps = {
     console.log(action)
     // return state.concat(action)
   },
-  [ImageAction.REMOVE_IMAGES](state, action) {
-    return state.filter(el => el.id !== action.id)
+  [ImageAction.REMOVE_IMAGES](state, idx) {
+    state.splice(idx, 1)
+    return state
   },
   [ImageAction.CLEAR_IMAGES]() {
     return []

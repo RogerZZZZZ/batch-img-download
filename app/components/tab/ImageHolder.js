@@ -13,6 +13,8 @@ export default class ImageHolder extends Component {
 
   static contextTypes = {
     checked: PropTypes.func,
+    download: PropTypes.func,
+    remove: PropTypes.func,
   }
 
   constructor(props, context) {
@@ -26,6 +28,15 @@ export default class ImageHolder extends Component {
     this.context.checked(checked, this.props.idx)
   }
 
+  download() {
+    console.log('download innser')
+    this.context.download(this.props.data.src)
+  }
+
+  remove() {
+    this.context.remove(this.props.idx)
+  }
+
   render () {
     const { data } = this.props
     return (
@@ -37,8 +48,8 @@ export default class ImageHolder extends Component {
           <Checkbox checked={this.state.checked} onChange={this.toggle.bind(this)}/>
 
           <div className="button-container">
-            <BasicIcon name="delete" size="2x"/>
-            <BasicIcon name="download" size="2x"/>
+            <BasicIcon onClick={this.remove.bind(this)} name="delete" size="2x"/>
+            <BasicIcon onClick={this.download.bind(this)} name="download" size="2x"/>
           </div>
         </div>
       </div>

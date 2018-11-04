@@ -1,12 +1,15 @@
 .image-holder {
   position: relative;
   float: left;
-  padding: 20px;
+  margin: 20px;
+  padding: 5px;
+  border: 1px solid #e3e3e3;
+  border-radius: 2px;
 }
 
 .image-item {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   cursor: pointer;
 }
 

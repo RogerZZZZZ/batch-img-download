@@ -9,12 +9,24 @@ export default class ImageWall extends Component {
     datas: PropTypes.array.isRequired,
   }
 
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      list: this.props.datas
+    }
+  }
+
+  componentWillReceiveProps(nextProp) {
+    this.setState({
+      list: nextProp.datas
+    })
+  }
+
   render () {
-    const { datas } = this.props
     return (
       <div className="image-wall">
         {
-          datas.map((data, idx) => {
+          this.state.list.map((data, idx) => {
             return (
               <ImageHolder data={data} key={idx} idx={idx}/>
             )

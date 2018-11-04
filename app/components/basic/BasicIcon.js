@@ -7,10 +7,11 @@ export default class BasicIcon extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     size: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
   }
 
   render() {
-    const { name, size } = this.props
+    const { name, size, onClick } = this.props
 
     const classes = classnames({
       'zmdi': true,
@@ -19,7 +20,7 @@ export default class BasicIcon extends Component {
     })
 
     return (
-      <div className="basic-icon-wrapper">
+      <div className="basic-icon-wrapper" onClick={onClick}>
         <i className={classes}/>
       </div>
     )

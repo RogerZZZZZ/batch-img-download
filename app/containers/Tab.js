@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Button, Message } from 'element-react'
+import { Button, Message, MessageBox } from 'element-react'
 import ImageWall from '../components/tab/ImageWall'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -23,6 +23,8 @@ export default class Tab extends Component {
 
   static childContextTypes = {
     checked: PropTypes.func,
+    remove: PropTypes.func,
+    download: PropTypes.func,
   }
 
   constructor(props, context) {
@@ -36,6 +38,8 @@ export default class Tab extends Component {
   getChildContext() {
     return {
       checked: this.chooseImage.bind(this),
+      remove: this.removeImage.bind(this),
+      download: this.downloadImage.bind(this),
     }
   }
 
@@ -50,6 +54,27 @@ export default class Tab extends Component {
     this.state.list[idx].checked = checked
   }
 
+  downloadImage (src) {
+    console.log(src, 'download')
+  }
+
+  removeImage (idx) {
+    MessageBox.confirm('Are you sure to remove this image?', 'Warning', {
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel'
+    }).then(() => {
+      Message({
+        type: 'success',
+        message: 'Remove Successfully!'
+      })
+      this.state.list.splice(idx, 1)
+      this.setState({
+        list: this.state.list
+      })
+      this.props.actions.removeImage(idx)
+    })
+  }
+
   download () {
     const waitingList = this.state.list.reduce((arr, el) => {
       if (el.checked) arr.push(el.src)
@@ -62,18 +87,24 @@ export default class Tab extends Component {
   }
 
   clearImages() {
-    this.props.actions.clearImages()
+    MessageBox.confirm('Are you sure to remove all images?', 'Warning', {
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel'
+    }).then(() => {
+      Message({
+        type: 'success',
+        message: 'Remove Successfully!'
+      })
+      this.props.actions.clearImages()
+    })
   }
 
   render() {
-    const { actions, images } = this.props;
-
     return (
       <div>
-        <ImageWall datas={images}/>
+        <ImageWall datas={this.state.list}/>
 
         <Button onClick={this.download.bind(this)}>Download</Button>
-
         <Button onClick={this.clearImages.bind(this)}>Clear</Button>
       </div>
     );

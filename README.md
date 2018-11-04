@@ -23,6 +23,7 @@
   - [x] Add webpack alias
 - [ ] Other issues
   - [x] image src is relative path.
+  - [ ] Tab page can set the image size.
 
 ## Installation
 
