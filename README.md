@@ -10,13 +10,13 @@
     - [x] After select images directly show on new tab
   - [x] Provide batch download button
     - [x] Support user to select images to download
-  - [ ] Support user to remove images
-- [ ] Use button in popup to control work flow
+  - [x] Support user to remove images
+- [x] Use button in popup to control work flow
   - [x] Design and implement popup window
   - [x] MODE_ONE: select begin and end
     - [x] Get all images in the selected scope
     - [x] Highlighten the image in selected scope
-  - [ ] MODE_TWO: selct picture one by one
+  - [x] MODE_TWO: selct picture one by one
 - [ ] Add shortcut for triggering extension.
 - [x] Webpack issue
   - [x] Add base config and use webpack merge

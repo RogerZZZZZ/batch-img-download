@@ -6,10 +6,9 @@
   let firstClick_ = null
   let secondClick_ = null
   let flag_ = false
-  let controlFlag_ = false
   let config_ = null
   
-  const directToTab = (imageSize) => {
+  const directToTab = () => {
     chrome.runtime.sendMessage({
       type: 'open_tab',
     })
@@ -20,12 +19,11 @@
     const conf = config_.sources || ['Image']
     const imgs = domHelper.getImgs(ancestor, firstClick_, secondClick_, conf)
     store.save(imgs)
-    window.document.removeEventListener('click', clickHandler)
-    directToTab(imgs.length)
+    window.document.onclick = null
+    directToTab()
   }
   
   const clickHandler = (e) => {
-    if (!controlFlag_) return
     const node = e.target || e.srcElement
     if (!flag_) painter.clearPainting()
     if (!node) return
@@ -41,21 +39,34 @@
         firstClick_ = [secondClick_, secondClick_ = firstClick_][0]
         painter.swapFlags()
       }
-      controlFlag_ = false
       domHandler()
     }
     flag_ = !flag_
   }
-  
+
+  const singleSelect = (e) => {
+    const node = e.target || e.srcElement
+    const conf = config_.sources || ['Image']
+    const imgs = domHelper.getImgsInOne(node, conf)
+    store.save(imgs)
+  }
   
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    config_ = request
-    controlFlag_ = true
-    flag_ = false
-    painter.clearPainting()
-    firstClick_ = null
-    secondClick_ = null
-    window.document.addEventListener('click', clickHandler)
+    if (!!window.document.onclick) window.document.onclick = null
+    if (request.type === 'beginSign') {
+      config_ = request
+      if (config_.mode === 'Single Select') {
+        window.document.onclick = singleSelect
+      } else {
+        flag_ = false
+        painter.clearPainting()
+        firstClick_ = null
+        secondClick_ = null
+        window.document.onclick = clickHandler
+      }
+    } else if (request.type === 'stopSign') {
+      directToTab()
+    }
     sendResponse()
   })
 })()

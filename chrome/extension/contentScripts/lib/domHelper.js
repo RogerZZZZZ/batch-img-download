@@ -62,6 +62,10 @@ const domHelper = {
     this.walkDom(root, types, begin, end)
     return this.deleteDuplication(this.imgCollections)
   },
+  getImgsInOne: function (root, types) {
+    this.walkDom(root, types, null, null)
+    return this.deleteDuplication(this.imgCollections)
+  },
   deleteDuplication: (arr) => [...new Set(arr)],
   walkDom: function(node, types, begin, end) {
     if (this.endFlag) return

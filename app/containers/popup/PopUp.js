@@ -8,6 +8,7 @@ export default class PopUp extends Component {
 
   static propTypes = {
     runExtract: PropTypes.func.isRequired,
+    stopExtract: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
@@ -28,6 +29,10 @@ export default class PopUp extends Component {
     this.props.runExtract(config)
   }
 
+  stop() {
+    this.props.stopExtract()
+  }
+
   sourceSelect(val) {
     this.setState({
       source: val,
@@ -38,6 +43,21 @@ export default class PopUp extends Component {
     this.setState({
       currMode: val,
     })
+  }
+
+  buttonsRender() {
+    if (this.state.currMode === 'Single Select') {
+      return (
+        <div>
+          <Button onClick={this.run.bind(this)}>Begin</Button>
+          <Button onClick={this.stop.bind(this)}>Stop</Button>
+        </div>
+      )
+    } else {
+      return (
+        <Button onClick={this.run.bind(this)}>Confirm</Button>
+      )
+    }
   }
 
   render() {
@@ -73,7 +93,7 @@ export default class PopUp extends Component {
         </div>
 
         <div className="bottom-container">
-          <Button onClick={this.run.bind(this)}>OK</Button>
+          {this.buttonsRender()}
         </div>
       </div>
     );
