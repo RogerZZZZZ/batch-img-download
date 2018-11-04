@@ -54,8 +54,8 @@ export default class Tab extends Component {
     this.state.list[idx].checked = checked
   }
 
-  downloadImage (src) {
-    console.log(src, 'download')
+  downloadImage (src, idx) {
+    downloadFromUrl(src, idx)
   }
 
   removeImage (idx) {

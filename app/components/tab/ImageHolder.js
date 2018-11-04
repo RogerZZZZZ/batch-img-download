@@ -29,8 +29,8 @@ export default class ImageHolder extends Component {
   }
 
   download() {
-    console.log('download innser')
-    this.context.download(this.props.data.src)
+    const { data, idx } = this.props
+    this.context.download(data.src, idx)
   }
 
   remove() {
