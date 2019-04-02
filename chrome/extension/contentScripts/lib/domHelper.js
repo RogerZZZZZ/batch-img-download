@@ -87,10 +87,13 @@ const domHelper = {
   extractImgPath: function (node, types) {
     const tag = node.tagName
     if (types.indexOf('Image') > -1 && tag === 'IMG') {
-      const url = node.getAttribute('src')
-      if (url && url !== '') {
-        this.imgCollections.push(pathHelper.getCorrectUrl(url))
-        node.style.border = '2px solid #0366d6'
+      const style = window.getComputedStyle(node, false)
+      if (style.display.toString() !== 'none' && style.visibility.toString() !== 'hidden') {
+        const url = node.getAttribute('src')
+        if (url && url !== '') {
+          this.imgCollections.push(pathHelper.getCorrectUrl(url))
+          node.style.border = '2px solid #0366d6'
+        }
       }
     }
     if (types.indexOf('Background') > -1) {
